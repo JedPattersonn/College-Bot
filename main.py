@@ -15,12 +15,16 @@ class CollegeEmailer:
     state = "" #your state
     address = "" #your address
     
+    i = 0
 
     with open('collegeemails.csv', newline='') as csvfile:
         emails = list(csv.reader(csvfile))
         
     for collegeEmail, collegeName in emails:
         try:
+            
+            i = i + 1
+            
             s = smtplib.SMTP('smtp.gmail.com', 587)
     
             # start TLS for security
@@ -41,7 +45,7 @@ class CollegeEmailer:
             # terminating the session
             s.quit()
         
-            Logger.success(f"Successfully sent an email to {collegeName}")
+            Logger.success(f"Task {i} | Successfully sent an email to {collegeName}")
 
             time.sleep(1.5)    
         except:
